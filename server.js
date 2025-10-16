@@ -164,7 +164,7 @@ app.get("/project-form", requireAdmin, (req, res) => {
 
 // Proses tambah project
 app.post("/dashboard/project/add", requireAdmin, upload.single('image'), async (req, res) => {
-  const image = req.file ? '/upload/' + req.file.filename : '';
+  const image = req.file ? req.file.path : '';
   await dataHandler.createProject({ ...req.body, image });
   res.redirect("/dashboard");
 });
@@ -178,7 +178,7 @@ app.get('/dashboard/project/detail/:id', requireAdmin, async (req, res) => {
 
 // Proses update project
 app.post('/dashboard/project/update/:id', requireAdmin, upload.single('image'), async (req, res) => {
-  const image = req.file ? '/upload/' + req.file.filename : req.body.oldImage;
+  const image = req.file ? req.file.path : req.body.oldImage;
   await dataHandler.updateProject(req.params.id, { ...req.body, image });
   res.json({ message: 'Proyek berhasil diperbarui' });
 });
@@ -201,7 +201,7 @@ app.get("/dashboard/experience/add", requireAdmin, (req, res) => {
 
 // Proses tambah experience
 app.post("/dashboard/experience/add", requireAdmin, upload.single('logo'), async (req, res) => {
-  const logo = req.file ? '/upload/' + req.file.filename : '';
+  const logo = req.file ? req.file.path : '';
 
   let skills = req.body.skills;
   if (Array.isArray(skills)) skills = skills.join(',');
@@ -218,7 +218,7 @@ app.get('/dashboard/experience/detail/:id', requireAdmin, async (req, res) => {
 
 // Proses update experience
 app.post('/dashboard/experience/update/:id', requireAdmin, upload.single('logo'), async (req, res) => {
-  const logo = req.file ? '/upload/' + req.file.filename : req.body.oldLogo;
+  const logo = req.file ? req.file.path : req.body.oldLogo;
   let skills = req.body.skills;
   if (Array.isArray(skills)) skills = skills.join(',');
   await dataHandler.updateExperience(req.params.id, { ...req.body, logo, skills });

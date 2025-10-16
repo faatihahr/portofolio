@@ -1,19 +1,26 @@
 // storage.js
 const multer = require('multer');
-const path = require('path');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-// Konfigurasi penyimpanan file
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '..', 'upload')); // folder untuk menyimpan file
-  },
-  filename: function (req, file, cb) {
-    const uniqueName = Date.now() + '-' + file.originalname;
-    cb(null, uniqueName);
+// Konfigurasi Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Konfigurasi penyimpanan Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'portfolio-uploads',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'gif'],
+    transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
   }
 });
 
-// Filter tipe file 
+// Filter tipe file
 function fileFilter(req, file, cb) {
   const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
   if (allowedTypes.includes(file.mimetype)) {
