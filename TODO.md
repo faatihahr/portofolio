@@ -1,0 +1,4 @@
+- [x] Edit public/styles/dashboard.css: Add width: 100%; box-sizing: border-box; to all input types (text, url, date, file, textarea, select) for uniform sizing.
+- [x] Adjust file input padding to 14px 16px and background to var(--secondary-bg) to match other inputs.
+- [x] Ensure textarea explicitly has width: 100%;.
+- [ ] Test the edit overlay form by running the server and checking uniform input sizes and label alignment.

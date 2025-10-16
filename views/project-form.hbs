@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">My<span>Portfolio</span></div>
+    <a href="/dashboard" class="logout-btn">Kembali</a>
+  </header>
+
+  <main class="content">
+    <form action="/dashboard/project/add" method="POST" enctype="multipart/form-data">
+      <h2>Tambah Proyek Baru</h2>
+
+      <label>Judul Proyek</label>
+      <input type="text" name="title" required>
+
+      <label>Deskripsi</label>
+      <textarea name="description" placeholder="Deskripsi proyek..."></textarea>
+
+      <label>Upload Gambar/Media</label>
+      <input type="file" name="image" accept="image/*,video/*">
+
+      <label>Kategori/Teknologi</label>
+      <input type="text" name="category" placeholder="Pisahkan dengan koma (contoh: Web, UI/UX)">
+
+      <label>Tautan Proyek</label>
+      <input type="url" name="link" placeholder="https://...">
+
+      <label>Status</label>
+      <select name="status">
+        <option value="draft">Draft</option>
+        <option value="published">Terbit</option>
+      </select>
+
+      <button type="submit" class="primary-btn">Simpan</button>
+    </form>
+  </main>
+</body>
+</html>

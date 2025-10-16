@@ -1,0 +1,36 @@
+<section id="work-experiences" class="experience-section">
+  <div class="container">
+    <h2 class="experience-title">Work Experiences:</h2>
+
+    {{#each experiences}}
+    <div class="experience-card">
+      <div class="experience-header">
+        <div class="header-top">
+          <span class="date-range">{{formatDate this.start_date}} - {{#if this.is_current}}Present{{else}}{{formatDate this.end_date}}{{/if}}</span>
+        </div>
+        <div class="header-bottom">
+          <div class="company-info">
+            <img src="{{this.logo}}" alt="{{this.company}} Logo" class="company-logo" />
+            <div class="experience-text">
+              <h3 class="experience-title">{{this.position}}</h3>
+              <p class="company-name">{{this.company}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="experience-details">
+        {{#each (split this.description ",")}}
+        <li>{{this}}</li>
+        {{/each}}
+      </ul>
+
+      <div class="experience-skills">
+        {{#each (split this.skills ",")}}
+        <span class="skill-tag">{{this}}</span>
+        {{/each}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</section>

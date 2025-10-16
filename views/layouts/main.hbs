@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">MyPortfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" data-scroll-to="techstack" href="#tech">Tech Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" data-scroll-to="experience" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" data-scroll-to="projects" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+                    <li class="nav-item ms-3">
+                    <a class="btn btn-success btn-sm" id="whatsappBtn" href="https://wa.me/6285179560074" target="_blank">Let's talk</a>
+                    </li>
+
+                    <li class="nav-item ms-2">
+                    <a class="btn btn-light btn-sm" href="https://drive.google.com/file/d/13lWOLQmiJI6Va_ntMX35vMUA12FbyenU/view?usp=sharing" target="_blank">Download CV</a>
+                    </li>
+
+                    <li class="nav-item ms-3">
+                        <button id="themeToggle" class="btn btn-sm btn-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle theme" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-sm btn-link" href="/login" title="Admin login">
+                        <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+      {{{body}}}
+    </main>
+    <footer class="py-4">
+      <div class="footer-container">
+      <p>© 2025 Designed and coded with <span class="heart">❤️</span>by <strong>Faatihah</strong></p>
+      <div class="footer-icons">
+        <a href="https://github.com/faatihahr" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/faatihahr" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/src/main.js"></script>
+  </body>
+</html>

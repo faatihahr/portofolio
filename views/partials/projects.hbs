@@ -1,0 +1,32 @@
+<section id="projects" class="projects-section py-5">
+  <div class="container">
+    <h2 class="projects-title mb-4">My Projects</h2>
+    <div class="projects-grid">
+      {{#if projects}}
+        {{#each projects}}
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="{{image}}" alt="{{title}}" class="project-img" />
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">{{title}}</h3>
+            <p class="project-desc">{{description}}</p>
+            {{#if link}}
+            <a href="{{link}}" target="_blank" class="project-link">Visit Project <i class="fa fa-arrow-up-right-from-square"></i></a>
+            {{/if}}
+            {{#if category}}
+            <div class="project-tags">
+              {{#each (split category ",")}}
+                <span class="project-tag">{{this}}</span>
+              {{/each}}
+            </div>
+            {{/if}}
+          </div>
+        </div>
+        {{/each}}
+      {{else}}
+        <div class="empty-message">No projects uploaded yet.</div>
+      {{/if}}
+    </div>
+  </div>
+</section>

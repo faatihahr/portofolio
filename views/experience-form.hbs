@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">My<span>Portfolio</span></div>
+    <a href="/dashboard" class="logout-btn">Kembali</a>
+  </header>
+
+  <main class="content">
+    <form action="/dashboard/experience/add" method="POST" enctype="multipart/form-data">
+      <h2>Tambah Pengalaman Kerja</h2>
+
+      <label>Nama Pekerjaan</label>
+      <input type="text" name="job_name" required>
+
+      <label>Jabatan</label>
+      <input type="text" name="position" required>
+
+      <label>Nama Perusahaan</label>
+      <input type="text" name="company" required>
+
+      <label>Logo Perusahaan</label>
+      <input type="file" name="logo" accept="image/*">
+
+      <label>Periode Bekerja</label>
+      <div class="date-range">
+        <input type="date" name="start_date">
+        <span>sampai</span>
+        <input type="date" name="end_date" id="endDate">
+      </div>
+      <label><input type="checkbox" name="is_current" id="stillWorking"> Masih bekerja</label>
+
+      <label>Deskripsi Pekerjaan</label>
+      <textarea name="description" placeholder="Gunakan • atau - untuk setiap poin, max 5"></textarea>
+
+      <label>Pilih Skill (maksimal 3)</label>
+      <select name="skills" id="skills" multiple required>
+        <option value="Node.js">Node.js</option>
+        <option value="Express JS">Express JS</option>
+        <option value="PostgreSQL">PostgreSQL</option>
+        <option value="HTML">HTML</option>
+        <option value="Bootstrap">Bootstrap</option>
+        <option value="Tailwind CSS">Tailwind CSS</option>
+        <option value="Javascript">Javascript</option>
+        <option value="CSS">CSS</option>
+      </select>
+      <small style="color:#388e3c;">Tekan Ctrl (atau Cmd di Mac) untuk memilih lebih dari satu skill.</small>
+
+      <button type="submit" class="primary-btn">Simpan</button>
+    </form>
+  </main>
+  <script src="src/timeRange.js"></script>
+</body>
+</html>

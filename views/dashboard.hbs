@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">My<span>Portfolio</span></div>
+    <div class="user-info">
+      <span class="username">{{username}}</span>
+      <form action="/logout" method="POST" style="display:inline;">
+        <button type="submit" class="logout-btn">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li><a href="project-form" class="{{#if (eq activePage 'project-form')}}active{{/if}}">Proyek</a></li>
+          <li><a href="experience-form" class="{{#if (eq activePage 'experience-form')}}active{{/if}}">Work Experience</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+    <!-- Overlay Edit Form -->
+  <div id="editOverlay" class="overlay" style="display:none;">
+    <div class="overlay-content">
+      <form id="editForm">
+        <h3>Edit Data</h3>
+        <!-- Dynamic form fields will be injected from editForm.js -->
+        <div id="editFields"></div>
+        <button type="submit" class="primary-btn">Simpan</button>
+        <button type="button" id="closeOverlay" class="secondary-btn">Batal</button>
+      </form>
+    </div>
+  </div>
+    <div id="toast" class="toast"></div>
+      <!-- PROJECT SECTION -->
+      <section id="projects">
+        <div class="section-header">
+          <h2>Manajemen Proyek</h2>
+          <a href="/dashboard/project/add" class="primary-btn">+ Tambah Proyek Baru</a>
+        </div>
+
+        <div class="card-container">
+          {{#if projects.length}}
+            {{#each projects}}
+              <!-- PROJECT CARD -->
+              <div class="card">
+                <img src="{{this.image}}" alt="{{this.title}}">
+                <h3>{{this.title}}</h3>
+                <p>Status: {{this.status}}</p>
+                <div class="card-actions">
+                  <button class="edit-btn" data-type="project" data-id="{{this.id_project}}">Edit</button>
+                  <button class="delete-btn" data-type="project" data-id="{{this.id_project}}">Delete</button>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <p class="empty-message">Belum ada proyek.</p>
+          {{/if}}
+        </div>
+      </section>
+
+      <!-- EXPERIENCE SECTION -->
+      <section id="experience">
+        <div class="section-header">
+          <h2>Work Experience</h2>
+          <a href="/dashboard/experience/add" class="primary-btn">+ Tambah Pengalaman</a>
+        </div>
+
+        <div class="card-container">
+          {{#if experiences.length}}
+            {{#each experiences}}
+              <!-- EXPERIENCE CARD -->
+              <div class="card">
+                <img src="{{this.logo}}" alt="{{this.company}}">
+                <h3>{{this.job_name}} - {{this.position}}</h3>
+                <p>{{this.company}}</p>
+                <small>{{this.start_date}} - {{#if this.is_current}}Present{{else}}{{this.end_date}}{{/if}}</small>
+                <div class="card-actions">
+                  <button class="edit-btn" data-type="experience" data-id="{{this.id_exp}}">Edit</button>
+                  <button class="delete-btn" data-type="experience" data-id="{{this.id_exp}}">Delete</button>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <p class="empty-message">Belum ada pengalaman.</p>
+          {{/if}}
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="src/editForm.js"></script>
+</body>
+</html>

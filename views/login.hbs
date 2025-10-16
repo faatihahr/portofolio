@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+  <!-- Background Animasi Space -->
+  <div class="space-bg">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="logo-section">
+        <h1 class="brand-logo">My<span>Portfolio</span></h1>
+        <p class="brand-tagline">Welcome back, Admin</p>
+      </div>
+
+      <div class="form-section">
+        <h2 class="form-title">Login to Dashboard</h2>
+
+        {{#if error}}
+        <div id="toast" class="toast">
+          <i class="icon-error"></i>
+          {{error}}
+        </div>
+        {{/if}}
+
+        <form action="/login" method="POST" class="login-form">
+          <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-wrapper">
+              <i class="icon-user"></i>
+              <input type="text" id="username" name="username" class="form-input" placeholder="Enter your username" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-wrapper">
+              <i class="icon-lock"></i>
+              <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+            </div>
+          </div>
+
+          <button type="submit" class="login-btn">
+            <span>Access Dashboard</span>
+            <i class="icon-arrow"></i>
+          </button>
+        </form>
+
+        <div class="form-footer">
+          <p>Secure admin access only</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/src/alertModal.js"></script>
+</body>
+</html>
