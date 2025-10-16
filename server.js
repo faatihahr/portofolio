@@ -2,7 +2,7 @@ const pool = require('./db/config');
 const express = require('express');
 const app = express();
 const { engine } = require('express-handlebars');
-const port = 3000;
+const port = process.env.PORT || 3000;
 const upload = require('./storage/storage');
 const dataHandler = require('./dataHandler');
 const path = require('path');
@@ -250,13 +250,17 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-app.listen(port, () => {
+if (require.main === module) {
+  app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
     pool.query('SELECT NOW()', (err, result) => {
-    if (err) {
-      console.error('❌ Database connection failed:', err.message);
-    } else {
-      console.log('✅ Database connected! Current time:', result.rows[0].now);
-    }
+      if (err) {
+        console.error('❌ Database connection failed:', err.message);
+      } else {
+        console.log('✅ Database connected! Current time:', result.rows[0].now);
+      }
+    });
   });
-});
+}
+
+module.exports = app;
