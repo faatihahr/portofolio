@@ -39,18 +39,18 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
+//Middleware baca file
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
-// Logging middleware
+//Middleware logging
 app.use((req, res, next) => {
   const now = new Date();
   console.log(`[${now.toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
-//Cookie parser middleware
+//Middleware cookieparser
 app.use(cookieParser());
 
 // Middleware session
@@ -70,8 +70,7 @@ function requireAdmin(req, res, next) {
   res.redirect('/login');
 }
 
-
-// Middleware to parse URL-encoded bodies
+// Middleware untuk parse URL-encoded 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -157,14 +156,9 @@ app.get("/dashboard/project/add", requireAdmin, (req, res) => {
   res.render("project-form", { layout: false, title: "Tambah Proyek Baru" });
 });
 
-//project form routes
-app.get("/project-form", requireAdmin, (req, res) => {
-  res.render("project-form", { layout: false, title: "Tambah Proyek Baru" });
-});
-
 // Proses tambah project
 app.post("/dashboard/project/add", requireAdmin, upload.single('image'), async (req, res) => {
-  const image = req.file ? req.file.path : '';
+  const image = req.file ? '/upload/' + req.file.filename : '';
   await dataHandler.createProject({ ...req.body, image });
   res.redirect("/dashboard");
 });
@@ -178,7 +172,7 @@ app.get('/dashboard/project/detail/:id', requireAdmin, async (req, res) => {
 
 // Proses update project
 app.post('/dashboard/project/update/:id', requireAdmin, upload.single('image'), async (req, res) => {
-  const image = req.file ? req.file.path : req.body.oldImage;
+  const image = req.file ? '/upload/' + req.file.filename : req.body.oldImage;
   await dataHandler.updateProject(req.params.id, { ...req.body, image });
   res.json({ message: 'Proyek berhasil diperbarui' });
 });
@@ -189,11 +183,6 @@ app.post('/dashboard/project/delete/:id', requireAdmin, async (req, res) => {
   res.json({ message: 'Proyek berhasil dihapus' });
 });
 
-//experience form routes
-app.get("/experience-form", requireAdmin, (req, res) => {
-  res.render("experience-form", { layout: false, title: "Tambah Pengalaman Baru" });
-});
-
 // Add experience form routes button in dashboard
 app.get("/dashboard/experience/add", requireAdmin, (req, res) => {
   res.render("experience-form", { layout: false, title: "Tambah Pengalaman Baru" });
@@ -201,7 +190,7 @@ app.get("/dashboard/experience/add", requireAdmin, (req, res) => {
 
 // Proses tambah experience
 app.post("/dashboard/experience/add", requireAdmin, upload.single('logo'), async (req, res) => {
-  const logo = req.file ? req.file.path : '';
+  const logo = req.file ? '/upload/' + req.file.filename : '';
 
   let skills = req.body.skills;
   if (Array.isArray(skills)) skills = skills.join(',');
@@ -218,7 +207,7 @@ app.get('/dashboard/experience/detail/:id', requireAdmin, async (req, res) => {
 
 // Proses update experience
 app.post('/dashboard/experience/update/:id', requireAdmin, upload.single('logo'), async (req, res) => {
-  const logo = req.file ? req.file.path : req.body.oldLogo;
+  const logo = req.file ? '/upload/' + req.file.filename : req.body.oldLogo;
   let skills = req.body.skills;
   if (Array.isArray(skills)) skills = skills.join(',');
   await dataHandler.updateExperience(req.params.id, { ...req.body, logo, skills });
@@ -250,17 +239,14 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-    pool.query('SELECT NOW()', (err, result) => {
-      if (err) {
-        console.error('❌ Database connection failed:', err.message);
-      } else {
-        console.log('✅ Database connected! Current time:', result.rows[0].now);
-      }
-    });
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+  pool.query('SELECT NOW()', (err, result) => {
+    if (err) {
+      console.error('❌ Database connection failed:', err.message);
+    } else {
+      console.log('✅ Database connected! Current time:', result.rows[0].now);
+    }
   });
-}
+});
 
-module.exports = app;

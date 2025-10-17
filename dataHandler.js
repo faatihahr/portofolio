@@ -15,7 +15,6 @@ exports.getAllProjects = async () => {
 };
 
 exports.getProjectById = async (id) => {
-  // Asumsi kolom primary key di DB bernama 'id'
   const res = await pool.query('SELECT * FROM projects WHERE id_project = $1', [id]);
   return res.rows[0];
 };

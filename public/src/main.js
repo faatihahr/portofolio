@@ -3,7 +3,7 @@ const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 const icon = themeToggle.querySelector('i');
 
-// Check for saved theme preference or default to light mode
+// Theme Preference (dark/light mode)
 const currentTheme = localStorage.getItem('theme') || 'light';
 html.setAttribute('data-bs-theme', currentTheme);
 
